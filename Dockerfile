@@ -1,4 +1,4 @@
-FROM nextcloud:25
+FROM nextcloud:26
 
 RUN apt-get update && apt-get install -y \
     supervisor \
