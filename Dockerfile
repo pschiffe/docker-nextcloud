@@ -1,7 +1,6 @@
 FROM nextcloud:27
 
-RUN apt-get update && apt-get install -y \
-    supervisor \
+RUN apt-get update && apt-get dist-upgrade -y && apt-get install -y supervisor \
   && rm -rf /var/lib/apt/lists/* \
   && mkdir /var/log/supervisord /var/run/supervisord
 
