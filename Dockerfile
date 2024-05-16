@@ -1,4 +1,4 @@
-FROM nextcloud:27
+FROM nextcloud:28
 
 RUN apt-get update && apt-get dist-upgrade -y && apt-get install -y supervisor \
   && rm -rf /var/lib/apt/lists/* \
