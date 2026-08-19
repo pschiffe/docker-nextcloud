@@ -1,0 +1,33 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "enabledManagers": [
+    "dockerfile",
+    "github-actions"
+  ],
+  "dependencyDashboard": true,
+  "prCreation": "immediate",
+  "automerge": false,
+  "packageRules": [
+    {
+      "description": "Never automerge dependency updates",
+      "matchManagers": [
+        "dockerfile",
+        "github-actions"
+      ],
+      "automerge": false
+    },
+    {
+      "description": "Require dashboard approval for major Nextcloud updates",
+      "matchManagers": [
+        "dockerfile"
+      ],
+      "matchPackageNames": [
+        "nextcloud"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "dependencyDashboardApproval": true
+    }
+  ]
+}
