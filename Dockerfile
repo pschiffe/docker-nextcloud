@@ -10,7 +10,9 @@ COPY apache-status.conf /etc/apache2/conf-available/
 RUN sed -i 's/^ServerTokens OS$/ServerTokens Prod/; s/^ServerSignature On$/ServerSignature Off/' /etc/apache2/conf-available/security.conf \
   && sed -i 's/combined/combined env=!dontlog/' /etc/apache2/sites-available/000-default.conf \
   && sed -i 's/vhost_combined/vhost_combined env=!dontlog/' /etc/apache2/conf-available/other-vhosts-access-log.conf \
-  && a2enconf apache-status
+  && a2enconf apache-status \
+  && a2disconf remoteip \
+  && a2dismod remoteip
 
 ENV NEXTCLOUD_UPDATE=1
 
