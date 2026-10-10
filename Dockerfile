@@ -1,4 +1,4 @@
-FROM nextcloud:33.0.9
+FROM nextcloud:34.0.4
 
 RUN apt-get update && apt-get dist-upgrade -y && apt-get install -y --no-install-recommends supervisor \
   && rm -rf /var/lib/apt/lists/* \
