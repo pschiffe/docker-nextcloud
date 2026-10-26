@@ -2,6 +2,9 @@
 
 Based on the official example from https://github.com/nextcloud/docker/tree/master/.examples/dockerfiles/cron/apache
 
+PHP session upload-progress tracking is disabled (`session.upload_progress.enabled=0`)
+via `/usr/local/etc/php/conf.d/zz-session.ini`.
+
 ## Reverse proxy trust
 
 Apache's `remoteip` configuration and module are disabled in this image.

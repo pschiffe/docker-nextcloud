@@ -2,7 +2,8 @@ FROM nextcloud:34.0.5
 
 RUN apt-get update && apt-get dist-upgrade -y && apt-get install -y --no-install-recommends supervisor \
   && rm -rf /var/lib/apt/lists/* \
-  && mkdir /var/log/supervisord /var/run/supervisord
+  && mkdir /var/log/supervisord /var/run/supervisord \
+  && printf 'session.upload_progress.enabled=0\n' > "$PHP_INI_DIR/conf.d/zz-session.ini"
 
 COPY supervisord.conf /
 COPY apache-status.conf /etc/apache2/conf-available/
