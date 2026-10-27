@@ -28,17 +28,18 @@ done
 docker exec "$container" \
   curl --fail --silent --show-error http://localhost/status.php >/dev/null
 
-docker top "$container" | grep -q '[a]pache2'
+# Consume full output: grep -q can SIGPIPE its producer under pipefail.
+docker top "$container" | grep '[a]pache2' >/dev/null
 
 docker exec "$container" \
   curl --head --silent http://localhost/status.php \
   | tr -d '\r' \
-  | grep -qx 'Server: Apache'
-docker top "$container" | grep -q '[c]rond'
+  | grep -x 'Server: Apache' >/dev/null
+docker top "$container" | grep '[c]rond' >/dev/null
 
 docker exec "$container" \
   curl --fail --silent --show-error http://localhost/server-status \
-  | grep -q 'ExtendedStatus On'
+  | grep 'ExtendedStatus On' >/dev/null
 
 # Forwarded requests must not gain access via the proxy's private address.
 status=$(docker exec "$container" curl --silent --output /dev/null --write-out '%{http_code}' \

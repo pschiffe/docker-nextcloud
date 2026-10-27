@@ -24,3 +24,16 @@ Use Nextcloud's application logs or Traefik's access logs for the resolved clien
 IP. `/server-status` permits direct local/private scrapers, but rejects requests
 carrying `X-Forwarded-For` or `X-Real-IP`, so proxying through an allowed gateway
 does not expose the status endpoint.
+
+## Smoke test
+
+Both CI workflows run the same smoke test before the final image build:
+
+```sh
+docker build -t nextcloud:smoke .
+.github/scripts/smoke-test.sh nextcloud:smoke
+```
+
+The script checks Apache and cron startup, response-header hardening, and
+reverse-proxy trust boundaries. Pipeline assertions consume their full input
+to avoid false SIGPIPE failures with `pipefail` enabled.
